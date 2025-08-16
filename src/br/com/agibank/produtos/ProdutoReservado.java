@@ -1,9 +1,9 @@
 package br.com.agibank.produtos;
 
 public class ProdutoReservado {
-    public String nome;
+    String nome;
+    String cliente;
     public int quantidade;
-    public String cliente;
 
     public ProdutoReservado(String nome, int quantidade, String cliente){
         this.nome = nome;

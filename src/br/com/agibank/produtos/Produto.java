@@ -1,9 +1,27 @@
 package br.com.agibank.produtos;
 
 public class Produto {
-    public String nome;
-    public int quantidade;
-    public String dataEntrada;
+    private final String nome;
+    private String dataCadastro;
+    private int quantidade;
+
+    public Produto(String nome, String dataCadastro, int quantidade){
+        this.nome = nome;
+        this.dataCadastro = dataCadastro;
+        this.quantidade = quantidade;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getQuantidade(){
+        return quantidade;
+    }
+
+    public String toString(){
+        return String.format("%-15s | %11d | %-12s", nome, quantidade, dataCadastro);
+    }
 
     public void entrada(int quantidade) {
         if(quantidade <= 0){
@@ -36,6 +54,6 @@ public class Produto {
     public void exibirProduto(){
         System.out.println("Produto: " + nome);
         System.out.println("Quantidade: " + quantidade);
-        System.out.println("Data de entrada: " + dataEntrada);
+        System.out.println("Data de Cadastro: " + dataCadastro);
     }
 }
