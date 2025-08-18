@@ -16,12 +16,15 @@ public class Servicos {
         int quantidade;
         //ENTRADA DE DADOS PARA CRIAÇÃO DE OBJETO PRODUTO
         System.out.println("\n=======CADASTRO DE PRODUTO=======");
-        System.out.print("Informe o nome do produto: ");
+        System.out.print("Informe o nome do produto (Digite 0 para cancelar): ");
         nome = scanner.nextLine();
+        if(nome.equals("0")) return;
+        if(Estoque.verificarCadastro(nome) == true) return;
         //TRATA A ENTRADA DE DADOS -> x > 0 / x == número inteiro
         quantidade = Validador.validarEntradaInt("Insira a quantidade do produto: ");
-        System.out.print("Informe a data de cadastro do produto: ");
+        System.out.print("Informe a data de cadastro do produto (Digite 0 para cancelar): ");
         dataCadastro = scanner.nextLine();
+        if(dataCadastro.equals("0")) return;
         Estoque.cadastro(nome, dataCadastro, quantidade);
         //EXIBIÇÃO DOS OBJETO PRODUTO CRIADO
         System.out.println("\nCADASTRO DE PRODUTO REALIZADO!");
@@ -43,7 +46,8 @@ public class Servicos {
             if (!nome.equals("Erro")) validacao = true;
         }
         //TRATA A ENTRADA DE DADOS -> x > 0 / x == número inteiro
-        quantidade = Validador.validarEntradaInt("Informe a quantidade da entrada: ");
+        quantidade = Validador.validarEntradaInt("Informe a quantidade da entrada (Digite 0 para cancelar): ");
+        if(quantidade == 0) return;
         MovimentacaoEstoque.entrada(Estoque.buscarProduto(nome), quantidade);
         System.out.println("\nENTRADA DE PRODUTO REALIZADA!");
     }
@@ -65,7 +69,8 @@ public class Servicos {
         quantiaAtual = Estoque.buscarProduto(nome).getQuantidade();
         //TRATA A ENTRADA DE DADOS -> x > 0 / x == número inteiro
         while (!validacao) {
-            quantidade = Validador.validarEntradaInt("Informe a quantidade da saída: ");
+            quantidade = Validador.validarEntradaInt("Informe a quantidade da saída (Digite 0 para cancelar): ");
+            if(quantidade == 0) return;
             if (quantidade > quantiaAtual) {
                 System.out.println("A saída deve ser menor ou igual a quantidade atual! (" + quantiaAtual + ")");
             } else validacao = true;

@@ -42,6 +42,14 @@ public class Estoque {
         }
         return nome;
     }
+    public static boolean verificarCadastro(String nome){
+        if(buscarProduto(nome) != null){
+            System.out.println("Produto já cadastrado!");
+            return true;
+        }
+        return false;
+    }
+
     public static Produto cadastro(String nome, String dataCadastro, int quantidade) {
         //CRIA OBJETO DE ACORDO COM DADOS DE cadastrarProduto()
         Produto produto = new Produto(nome, dataCadastro, quantidade);
