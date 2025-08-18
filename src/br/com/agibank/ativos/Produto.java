@@ -1,4 +1,4 @@
-package br.com.agibank.produtos;
+package br.com.agibank.ativos;
 
 public class Produto {
     private final String nome;

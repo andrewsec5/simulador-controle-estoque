@@ -1,6 +1,6 @@
 package br.com.agibank.controle;
 
-import br.com.agibank.produtos.Produto;
+import br.com.agibank.ativos.Produto;
 
 import java.util.HashMap;
 import java.util.Map;

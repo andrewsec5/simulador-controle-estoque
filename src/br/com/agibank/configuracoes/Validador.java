@@ -44,4 +44,8 @@ public class Validador {
         }
         return escolha;
     }
+
+    public static void validarCpf(String cpf){
+
+    }
 }

@@ -63,7 +63,10 @@ public class Menu {
                     menu = false;
                 }
             }
-
         }
+    }
+    public static void exibirMenuClientes(){
+        System.out.println("\n=======CLIENTES=======");
+
     }
 }
