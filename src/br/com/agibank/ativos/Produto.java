@@ -1,12 +1,12 @@
 package br.com.agibank.ativos;
 
 public class Produto {
-    private final String nome;
-    private String dataCadastro;
-    private int quantidade;
+    protected final String nome;
+    protected String dataCadastro;
+    protected int quantidade;
 
     public Produto(String nome, String dataCadastro, int quantidade){
-        this.nome = nome;
+        this.nome = nome.toLowerCase().trim();
         this.dataCadastro = dataCadastro;
         this.quantidade = quantidade;
     }

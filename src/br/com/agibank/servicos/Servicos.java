@@ -1,6 +1,8 @@
 package br.com.agibank.servicos;
 
+import br.com.agibank.ativos.Clientes;
 import br.com.agibank.configuracoes.Validador;
+import br.com.agibank.controle.ControleClientes;
 import br.com.agibank.controle.Estoque;
 import br.com.agibank.controle.MovimentacaoEstoque;
 
@@ -19,11 +21,10 @@ public class Servicos {
         System.out.print("Informe o nome do produto (Digite 0 para cancelar): ");
         nome = scanner.nextLine();
         if(nome.equals("0")) return;
-        if(Estoque.verificarCadastro(nome) == true) return;
+        if(Estoque.verificarCadastro(nome)) return;
         //TRATA A ENTRADA DE DADOS -> x > 0 / x == número inteiro
         quantidade = Validador.validarEntradaInt("Insira a quantidade do produto: ");
-        System.out.print("Informe a data de cadastro do produto (Digite 0 para cancelar): ");
-        dataCadastro = scanner.nextLine();
+        dataCadastro = Validador.validarData("Informe a data de cadastro do produto (Digite 0 para cancelar): ");
         if(dataCadastro.equals("0")) return;
         Estoque.cadastro(nome, dataCadastro, quantidade);
         //EXIBIÇÃO DOS OBJETO PRODUTO CRIADO
@@ -80,7 +81,6 @@ public class Servicos {
     }
 
     public static void listarProdutos() {
-        System.out.println();
         Estoque.listarProdutos();
     }
 
@@ -98,4 +98,28 @@ public class Servicos {
         quantidade = scanner.nextInt();
     }
    */
+
+    public static void cadastrarCliente() {
+        String nome;
+        String cpf;
+
+        System.out.println("\n=======CADASTRO DE CLIENTE=======");
+        System.out.print("Informe o nome do cliente (Digite 0 para cancelar): ");
+        nome = scanner.nextLine();
+        if (nome.equals("0")) return;
+        if(ControleClientes.verificarCliente(nome)) return;
+        cpf = Validador.validarCpf("Insira o cpf do cliente (Digite 0 para cancelar): ");
+        if(cpf.equals("0")) return;
+        Clientes cliente = new Clientes(nome, cpf);
+        ControleClientes.adicionarCliente(cliente);
+        System.out.println("\nCADASTRO REALIZADO!");
+        System.out.println("Cliente: " + cliente.getNome());
+        System.out.println("CPF: " + cliente.getCpf());
+    }
+
+    public static void listarClientes(){
+        System.out.println();
+        ControleClientes.listarClientes();
+
+    }
 }

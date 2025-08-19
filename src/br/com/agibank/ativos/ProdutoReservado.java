@@ -1,13 +1,13 @@
 package br.com.agibank.ativos;
 
-public class ProdutoReservado {
-    String nome;
+public class ProdutoReservado extends Produto {
     String cliente;
-    public int quantidade;
+    String dataRetirada;
 
-    public ProdutoReservado(String nome, int quantidade, String cliente){
-        this.nome = nome;
-        this.quantidade = quantidade;
+    public ProdutoReservado(String nome, int quantidade, String dataCadastro, String dataRetirada, String cliente){
+        super(nome, dataCadastro, quantidade);
         this.cliente = cliente;
+        this.dataRetirada = dataRetirada;
     }
+
 }

@@ -44,8 +44,35 @@ public class Validador {
         }
         return escolha;
     }
-
-    public static void validarCpf(String cpf){
-
+    public static String validarCpf(String msg){
+        String cpf = null;
+        boolean validacao = false;
+        //000.000.00 0 - 0 0
+        //012345678910111213
+        while(!validacao) {
+            System.out.print(msg);
+            cpf = scanner.nextLine();
+            if (cpf.equals("0")) return "0";
+            if (cpf.length() == 14) validacao = true;
+            else {
+                System.out.println("Insira o CPF no formato: (123.456.789-01).");
+            }
+        }
+        return cpf;
+    }
+    public static String validarData(String msg){
+        boolean validacao = false;
+        String data = null;
+        //05/01/2005
+        //0123456789
+        while(!validacao){
+            System.out.println(msg);
+            data = scanner.nextLine();
+            if(data.equals("0")) return data;
+            else if(data.charAt(3) != '/' || data.charAt(5) != '/'|| data.length() != 10) {
+                System.out.println("Formato inválido! Siga o formato (00/00/0000).");
+            }else validacao = true;
+        }
+        return data;
     }
 }

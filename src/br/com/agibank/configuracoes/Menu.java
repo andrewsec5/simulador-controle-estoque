@@ -1,5 +1,6 @@
 package br.com.agibank.configuracoes;
 
+import br.com.agibank.controle.ControleClientes;
 import br.com.agibank.servicos.Servicos;
 
 public class Menu {
@@ -23,7 +24,7 @@ public class Menu {
             }
             if (escolha == 2) {
                 //CHAMA O MENU DE CLIENTES
-                System.out.println("Menu clientes (WIP)...");
+                exibirMenuClientes();
             }
         }
     }
@@ -66,7 +67,21 @@ public class Menu {
         }
     }
     public static void exibirMenuClientes(){
-        System.out.println("\n=======CLIENTES=======");
+        boolean validacao = false;
+        byte escolha = 0;
 
+        while(!validacao) {
+            System.out.println("\n=======CLIENTES=======");
+            System.out.println("1 - Cadastro de clientes");
+            System.out.println("2 - Lista de clientes");
+            System.out.println("0 - Sair");
+            System.out.print("Opção: ");
+            escolha = Validador.validarEntradaMenu((byte) 2);
+            switch (escolha){
+                case 1 -> Servicos.cadastrarCliente();
+                case 2 -> Servicos.listarClientes();
+                case 0 -> validacao = true;
+            }
+        }
     }
 }
