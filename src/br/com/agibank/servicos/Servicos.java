@@ -20,13 +20,13 @@ public class Servicos {
         System.out.println("\n=======CADASTRO DE PRODUTO=======");
         System.out.print("Informe o nome do produto (Digite 0 para cancelar): ");
         nome = scanner.nextLine();
-        if(nome.equals("0")) return;
-        if(Estoque.verificarCadastro(nome)) return;
+        if (nome.equals("0")) return;
+        if (Estoque.verificarCadastro(nome)) return;
         //TRATA A ENTRADA DE DADOS -> x > 0 / x == número inteiro
         quantidade = Validador.validarEntradaInt("Insira a quantidade do produto (Digite 0 para cancelar): ");
-        if(quantidade == 0) return;
+        if (quantidade == 0) return;
         dataCadastro = Validador.validarData("Informe a data de cadastro do produto (Digite 0 para cancelar): ");
-        if(dataCadastro.equals("0")) return;
+        if (dataCadastro.equals("0")) return;
         Estoque.cadastro(nome, dataCadastro, quantidade);
         //EXIBIÇÃO DOS OBJETO PRODUTO CRIADO
         System.out.println("\nCADASTRO DE PRODUTO REALIZADO!");
@@ -40,7 +40,7 @@ public class Servicos {
         String nome = null;
         boolean validacao = false;
         int quantidade;
-        while(!validacao) {
+        while (!validacao) {
             //ENTRADA DE PRODUTO -> AUMENTA A QUANTIDADE DE OBJETO PRODUTO JA CRIADO!
             System.out.println("\n=======ENTRADA DE PRODUTO=======");
             nome = Estoque.verificarProduto("Informe o nome do produto (Digite 0 para cancelar): ");
@@ -49,7 +49,7 @@ public class Servicos {
         }
         //TRATA A ENTRADA DE DADOS -> x > 0 / x == número inteiro
         quantidade = Validador.validarEntradaInt("Informe a quantidade da entrada (Digite 0 para cancelar): ");
-        if(quantidade == 0) return;
+        if (quantidade == 0) return;
         MovimentacaoEstoque.entrada(Estoque.buscarProduto(nome), quantidade);
         System.out.println("\nENTRADA DE PRODUTO REALIZADA!");
     }
@@ -61,7 +61,7 @@ public class Servicos {
         int quantiaAtual;
         int quantidade = 0;
         //SAIDA DE PRODUTO -> REDUZ A QUANTIDADE DE OBJETO PRODUTO JA CRIADO!
-        while(!validacaoInicial) {
+        while (!validacaoInicial) {
             System.out.println("\n=======SAÍDA DE PRODUTO=======");
             nome = Estoque.verificarProduto("Informe o nome do produto (Digite 0 para cancelar): ");
             if (nome.equals("0")) return;
@@ -72,7 +72,7 @@ public class Servicos {
         //TRATA A ENTRADA DE DADOS -> x > 0 / x == número inteiro
         while (!validacao) {
             quantidade = Validador.validarEntradaInt("Informe a quantidade da saída (Digite 0 para cancelar): ");
-            if(quantidade == 0) return;
+            if (quantidade == 0) return;
             if (quantidade > quantiaAtual) {
                 System.out.println("A saída deve ser menor ou igual a quantidade atual! (" + quantiaAtual + ")");
             } else validacao = true;
@@ -96,22 +96,30 @@ public class Servicos {
         System.out.print("Informe o nome do produto (Digite 0 para cancelar): ");
         scanner.nextLine();
         nomeProduto = scanner.nextLine();
-        if(nomeProduto.equals("0")) return;
-        if(!Estoque.verificarCadastro(nomeProduto)) return;
-        if(Estoque.buscarProduto(nomeProduto).getQuantidade() == 0){
+        if (nomeProduto.equals("0")) return;
+        if (!Estoque.verificarCadastro(nomeProduto)) return;
+        if (Estoque.buscarProduto(nomeProduto).getQuantidade() == 0) {
             System.out.println("Esse produto está em falta!");
             return;
         }
         Clientes cliente = ControleClientes.procurarCliente("Informe o nome do cliente da reserva (Digite 0 para cancelar): ");
-        if(cliente == null) return;
-        while(!validacao) {
+        if (cliente == null) return;
+        while (!validacao) {
             quantidade = Validador.validarEntradaInt("Insira a quantidade da reserva (Digite 0 para cancelar): ");
             if (quantidade == 0) return;
             if (Estoque.buscarProduto(nomeProduto).getQuantidade() < quantidade) {
                 System.out.println("A quantidade informada deve ser menor ou igual ao estoque do produto (" + Estoque.buscarProduto(nomeProduto).getQuantidade() + ").");
-            }else validacao = true;
+            } else validacao = true;
         }
+
         //ADICIONAR DATA DE RESERVA
+
+        //USAR MAP(CHAVE=CLIENTE, VALOR=LIST<PRODUTOSRESERVADOS>) --> CRIAR HASHMAP NO CONTROLECLIENTES
+        /*
+        VERIFICAR SE CLIENTE EXISTE/CADASTRADO (SE N, RETURN / SE S, CONTINUAR)
+        PROCURAR NO MAP SE CHAVE/CLIENTES TEM VALOR (SE == NULL, RETURN / SE S, CONTINUAR)
+        LISTAR PRODUTOS E DAR OPÇÃO DE ENTRADA OU SAÍDA DE PRODUTO (REAPROVEITAR SERVICOS -> ENCURTAR)
+         */
 
     }
 
@@ -124,9 +132,9 @@ public class Servicos {
         System.out.print("Informe o nome do cliente (Digite 0 para cancelar): ");
         nome = scanner.nextLine();
         if (nome.equals("0")) return;
-        if(ControleClientes.verificarCliente(nome)) return;
+        if (ControleClientes.verificarCliente(nome)) return;
         cpf = Validador.validarCpf("Insira o cpf do cliente (Digite 0 para cancelar): ");
-        if(cpf.equals("0")) return;
+        if (cpf.equals("0")) return;
         Clientes cliente = new Clientes(nome, cpf);
         ControleClientes.adicionarCliente(cliente);
         System.out.println("\nCADASTRO REALIZADO!");
@@ -134,16 +142,16 @@ public class Servicos {
         System.out.println("CPF: " + cliente.getCpf());
     }
 
-    public static void listarClientes(){
+    public static void listarClientes() {
         System.out.println();
         ControleClientes.listarClientes();
 
     }
 
-    public static void pesquisarCliente(){
+    public static void pesquisarCliente() {
         System.out.println("\n=======PESQUISAR CLIENTE=======");
         Clientes cliente = ControleClientes.procurarCliente("Insira o nome do cliente (Digite 0 para cancelar):");
-        if(cliente == null) return;
+        if (cliente == null) return;
         System.out.println();
         System.out.println("CLIENTE ENCONTRADO!");
         System.out.println("Cliente: " + cliente.getNome());
