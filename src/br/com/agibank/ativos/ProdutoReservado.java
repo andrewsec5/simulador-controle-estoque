@@ -1,13 +1,15 @@
 package br.com.agibank.ativos;
 
-public class ProdutoReservado extends Produto {
-    String cliente;
-    String dataRetirada;
+import java.lang.ref.Cleaner;
 
-    public ProdutoReservado(String nome, int quantidade, String dataCadastro, String dataRetirada, String cliente){
+public class ProdutoReservado extends Produto {
+    private Clientes cliente;
+    private String dataRetirada;
+
+    public ProdutoReservado(String nome, int quantidade, String dataCadastro, Clientes cliente){
+        //MONTAR DPS
         super(nome, dataCadastro, quantidade);
         this.cliente = cliente;
-        this.dataRetirada = dataRetirada;
     }
 
 }

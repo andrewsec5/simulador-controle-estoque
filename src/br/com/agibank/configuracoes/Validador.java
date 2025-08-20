@@ -15,10 +15,11 @@ public class Validador {
                 System.out.print(msg);
                 quantidade = scanner.nextInt();
                 scanner.nextLine();
+                if(quantidade == 0) return 0;
                 if (quantidade > 0) validacao = true;
-                else System.out.println("Entrada inválida! Digite um número inteiro maior que 0.");
+                else System.out.println("Entrada inválida! Digite um número inteiro.");
             } catch (InputMismatchException e) {
-                System.out.println("Entrada inválida! Digite um número inteiro maior que 0.");
+                System.out.println("Entrada inválida! Digite um número inteiro.");
                 scanner.nextLine();
             }
         }
@@ -53,7 +54,7 @@ public class Validador {
             System.out.print(msg);
             cpf = scanner.nextLine();
             if (cpf.equals("0")) return "0";
-            if (cpf.length() == 14) validacao = true;
+            if (cpf.length() == 14 && cpf.charAt(3) == '.' && cpf.charAt(7) == '.' && cpf.charAt(11) == '-') validacao = true;
             else {
                 System.out.println("Insira o CPF no formato: (123.456.789-01).");
             }

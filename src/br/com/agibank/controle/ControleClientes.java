@@ -22,18 +22,18 @@ public class ControleClientes {
 
     public static Clientes buscarCliente(String nome){return mapaClientes.get(nome.toLowerCase().trim());}
 
-    public static String procurarCliente(String msg){
+    public static Clientes procurarCliente(String msg){
         String nome;
 
         System.out.println(msg);
         nome = scanner.nextLine();
-        if(nome.equals("0")) ;
+        if(nome.equals("0")) return null;
         Clientes clientes = buscarCliente(nome);
         if(clientes == null){
             System.out.println("Cliente não encontrado!");
-            return "Erro";
+            return null;
         }
-        return nome;
+        return clientes;
     }
 
     public static boolean verificarCliente(String nome){

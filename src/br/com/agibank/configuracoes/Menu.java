@@ -1,6 +1,5 @@
 package br.com.agibank.configuracoes;
 
-import br.com.agibank.controle.ControleClientes;
 import br.com.agibank.servicos.Servicos;
 
 public class Menu {
@@ -73,13 +72,17 @@ public class Menu {
         while(!validacao) {
             System.out.println("\n=======CLIENTES=======");
             System.out.println("1 - Cadastro de clientes");
-            System.out.println("2 - Lista de clientes");
+            System.out.println("2 - Pesquisar cliente");
+            System.out.println("3 - Saida de produto reservado");
+            System.out.println("4 - Lista de clientes");
             System.out.println("0 - Sair");
             System.out.print("Opção: ");
-            escolha = Validador.validarEntradaMenu((byte) 2);
+            escolha = Validador.validarEntradaMenu((byte) 4);
             switch (escolha){
                 case 1 -> Servicos.cadastrarCliente();
-                case 2 -> Servicos.listarClientes();
+                case 2 -> Servicos.pesquisarCliente();
+                case 3 -> System.out.println("Saida de produto reservado (WIP)");
+                case 4 -> Servicos.listarClientes();
                 case 0 -> validacao = true;
             }
         }

@@ -23,7 +23,8 @@ public class Servicos {
         if(nome.equals("0")) return;
         if(Estoque.verificarCadastro(nome)) return;
         //TRATA A ENTRADA DE DADOS -> x > 0 / x == número inteiro
-        quantidade = Validador.validarEntradaInt("Insira a quantidade do produto: ");
+        quantidade = Validador.validarEntradaInt("Insira a quantidade do produto (Digite 0 para cancelar): ");
+        if(quantidade == 0) return;
         dataCadastro = Validador.validarData("Informe a data de cadastro do produto (Digite 0 para cancelar): ");
         if(dataCadastro.equals("0")) return;
         Estoque.cadastro(nome, dataCadastro, quantidade);
@@ -84,20 +85,36 @@ public class Servicos {
         Estoque.listarProdutos();
     }
 
-    /*
+
     public static void reservarProduto() {
-        //TERMINAR DE FAZER
-        String nome;
+        String nomeProduto;
+        String nomeCliente;
         int quantidade;
-        //INCOMPLETO ******
+        boolean validacao = false;
+
         System.out.println("\n=======RESERVA DE PRODUTO=======");
-        System.out.print("Informe o nome do produto: ");
+        System.out.print("Informe o nome do produto (Digite 0 para cancelar): ");
         scanner.nextLine();
-        nome = scanner.nextLine();
-        System.out.print("Quantidade reservada: ");
-        quantidade = scanner.nextInt();
+        nomeProduto = scanner.nextLine();
+        if(nomeProduto.equals("0")) return;
+        if(!Estoque.verificarCadastro(nomeProduto)) return;
+        if(Estoque.buscarProduto(nomeProduto).getQuantidade() == 0){
+            System.out.println("Esse produto está em falta!");
+            return;
+        }
+        Clientes cliente = ControleClientes.procurarCliente("Informe o nome do cliente da reserva (Digite 0 para cancelar): ");
+        if(cliente == null) return;
+        while(!validacao) {
+            quantidade = Validador.validarEntradaInt("Insira a quantidade da reserva (Digite 0 para cancelar): ");
+            if (quantidade == 0) return;
+            if (Estoque.buscarProduto(nomeProduto).getQuantidade() < quantidade) {
+                System.out.println("A quantidade informada deve ser menor ou igual ao estoque do produto (" + Estoque.buscarProduto(nomeProduto).getQuantidade() + ").");
+            }else validacao = true;
+        }
+        //ADICIONAR DATA DE RESERVA
+
     }
-   */
+
 
     public static void cadastrarCliente() {
         String nome;
@@ -121,5 +138,16 @@ public class Servicos {
         System.out.println();
         ControleClientes.listarClientes();
 
+    }
+
+    public static void pesquisarCliente(){
+        System.out.println("\n=======PESQUISAR CLIENTE=======");
+        Clientes cliente = ControleClientes.procurarCliente("Insira o nome do cliente (Digite 0 para cancelar):");
+        if(cliente == null) return;
+        System.out.println();
+        System.out.println("CLIENTE ENCONTRADO!");
+        System.out.println("Cliente: " + cliente.getNome());
+        System.out.println("CPF: " + cliente.getCpf());
+        System.out.println("Produtos reservados: ");
     }
 }
